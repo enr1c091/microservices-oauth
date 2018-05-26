@@ -1,0 +1,84 @@
+
+server: 
+  port: 9093 
+  servlet: 
+    context-path: /ms-got
+  compression:
+    enabled: false
+  
+management:
+  security:
+    enabled: false  
+ 
+spring:
+  profiles: default
+  application:
+    name: ms-got
+  jpa:
+    database: H2
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    hibernate:
+      ddl-auto: create
+  datasource:
+    url: jdbc:h2:mem:got;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    password: sa
+    driver-class-name: org.h2.Driver
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+    serialization:
+      indent-output: true
+    
+logging:
+  level:
+    ROOT: ERROR
+    org.springframework.web: ERROR
+    com.enrico.microservices.got: DEBUG
+  file:  C:\\myproject2\\application.log
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+    
+    
+
+eureka:
+  instance:
+    hostname: localhost
+    port: 9091
+  client:
+    registerWithEureka: true
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${eureka.instance.port}/eureka/
+  server:
+    wait-time-in-ms-when-sync-empty: 3000
+    
+--- 
+
+spring:
+  profiles: docker
+
+eureka:
+  instance:
+    hostname: eureka
+    port: 9091
+  client:
+    registerWithEureka: true
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${eureka.instance.port}/eureka/
+  server:
+    wait-time-in-ms-when-sync-empty: 3000
+    
+logging:
+  level:
+    ROOT: ERROR
+    org.springframework.web: ERROR
+    com.enrico.microservices.got: DEBUG
+  file:  /tmp/logs/application.log
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"

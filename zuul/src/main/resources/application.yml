@@ -1,0 +1,88 @@
+spring:
+  application:
+    name: zuul
+  profiles: default
+    
+server:
+  port: 9092
+
+  
+endpoints:
+  restart:
+    enabled: true
+  shutdown:
+    enabled: true
+  health:
+    sensitive: false
+
+    
+zuul:
+  ignoredServices: "*"
+  routes:
+    ms-got:  
+      sensitiveHeaders:
+      path: /**
+      serviceId: ms-got  
+  
+eureka:
+  instance:
+    hostname: localhost
+    port: 9091
+  client:
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${eureka.instance.port}/eureka/
+  server:
+    wait-time-in-ms-when-sync-empty: 3000
+    
+logging:
+  level:
+    ROOT: ERROR
+    org.springframework.web: ERROR
+    com.enrico.microservices: DEBUG
+  file:  /tmp/logs/application.log
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
+    
+#  cloud:
+#    config:
+#      uri: http://localhost:9090
+
+---
+
+spring:
+  profiles: docker
+
+zuul:
+  ignoredServices: "*"
+  routes:
+    ms-got:  
+      sensitiveHeaders:
+      path: /**
+      serviceId: ms-got  
+  
+eureka:
+  instance:
+    hostname: eureka
+    port: 9091
+  client:
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${eureka.instance.port}/eureka/
+  server:
+    wait-time-in-ms-when-sync-empty: 3000
+
+
+logging:
+  level:
+    ROOT: ERROR
+    org.springframework.web: ERROR
+    com.enrico.microservices: DEBUG
+  file:  /tmp/logs/application.log
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
+#  cloud:
+#    config:
+#      uri: http://localhost:9090
