@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,6 +44,7 @@ public class PersonController {
 
 	@LogExecution
 	@LogRequest
+	@PreAuthorize("hasAuthority('role_admin')")
 	@GetMapping(path = "/{id}")
 	@ApiOperation(value = "Search a person with an ID", response = Person.class)
 	public Person getOne(@PathVariable("id") Long id) {

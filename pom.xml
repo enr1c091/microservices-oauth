@@ -18,6 +18,7 @@
         <module>eureka-server</module>
         <module>zuul</module>
         <module>ms-got</module>
+        <module>auth-server</module>
     </modules>
 
     <properties>

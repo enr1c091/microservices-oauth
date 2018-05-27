@@ -49,7 +49,7 @@ public class PersonService {
 	
 	@PostConstruct
 	public void populate() {
-		LOGGER.info("Houses populated");
+		LOGGER.info("People populated");
 	}
 	
 	@Transactional(readOnly = true)

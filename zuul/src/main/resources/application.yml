@@ -23,6 +23,11 @@ zuul:
       sensitiveHeaders:
       path: /**
       serviceId: ms-got  
+    auth-server:  
+      sensitiveHeaders:
+      path: /uaa/**
+      stripPrefix: false
+      serviceId: auth-server
   
 eureka:
   instance:
@@ -44,10 +49,6 @@ logging:
     console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
     file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
 
-    
-#  cloud:
-#    config:
-#      uri: http://localhost:9090
 
 ---
 
@@ -61,6 +62,11 @@ zuul:
       sensitiveHeaders:
       path: /**
       serviceId: ms-got  
+  auth-server:  
+      sensitiveHeaders:
+      path: /uaa/**
+      stripPrefix: false
+      serviceId: auth-server
   
 eureka:
   instance:
@@ -83,6 +89,3 @@ logging:
     console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
     file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
 
-#  cloud:
-#    config:
-#      uri: http://localhost:9090
