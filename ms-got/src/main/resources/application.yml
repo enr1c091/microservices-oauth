@@ -9,6 +9,9 @@ server:
 management:
   security:
     enabled: false  
+
+auth-server:
+  url: http://localhost:9999
  
 spring:
   profiles: default
@@ -78,6 +81,10 @@ eureka:
 
 spring:
   profiles: docker
+
+
+auth-server:
+  url: http://zuul:9092
 
 eureka:
   instance:

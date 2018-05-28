@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -22,10 +23,13 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
 
 	@Autowired
 	private DataSource dataSource;
-	
+
+	@Value("${auth-server.url}")
+	private String authEndpoint;
+
 	@Bean
 	public JdbcTokenStore tokenStore() {
-	    return new JdbcTokenStore(dataSource);
+		return new JdbcTokenStore(dataSource);
 	}
 
 	@Override
@@ -43,16 +47,13 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
 		resources.resourceId("mw/adminapp").tokenStore(tokenStore());
 	}
 
-	
 	@Bean
 	public ResourceServerTokenServices tokenService() {
-	   RemoteTokenServices tokenServices = new RemoteTokenServices();
-	   tokenServices.setClientId("adminapp");
-	   tokenServices.setClientSecret("password");
-	   tokenServices.setCheckTokenEndpointUrl("http://localhost:9092/uaa/oauth/check_token");
-	   return tokenServices;
+		RemoteTokenServices tokenServices = new RemoteTokenServices();
+		tokenServices.setClientId("adminapp");
+		tokenServices.setClientSecret("password");
+		tokenServices.setCheckTokenEndpointUrl(authEndpoint + "/uaa/oauth/check_token");
+		return tokenServices;
 	}
-	
-	
-	
+
 }

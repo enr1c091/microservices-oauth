@@ -1,4 +1,4 @@
-package com.br.gic.negativacao.ms.negativacao;
+package com.enrico.microservices.got;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
