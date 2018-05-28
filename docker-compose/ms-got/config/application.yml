@@ -1,0 +1,66 @@
+
+server: 
+  port: 9093 
+  servlet: 
+    context-path: /ms-got
+  compression:
+    enabled: false
+  
+management:
+  security:
+    enabled: false  
+ 
+spring:
+  profiles: docker
+  application:
+    name: ms-got
+  datasource:
+    url: jdbc:mysql://mysql:3306/oauth2?useSSL=false
+    username: root
+    password: password
+    driver-class-name: com.mysql.jdbc.Driver
+    tomcat:
+      test-while-idle: true
+      validation-query: SELECT 1
+    initialization-mode: never
+    platform: mysql
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+    hibernate:
+      naming:
+        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+      ddl-auto: create
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+    serialization:
+      indent-output: true
+    
+logging:
+  level:
+    ROOT: ERROR
+    org.springframework.web: ERROR
+    com.enrico.microservices.got: DEBUG
+  file:  /tmp/logs/application.log
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
+#URL used for remote token verification against Auth Server
+auth-server:
+  url: http://zuul:9092    
+    
+
+eureka:
+  instance:
+    hostname: eureka
+    port: 9091
+  client:
+    registerWithEureka: true
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${eureka.instance.port}/eureka/
+  server:
+    wait-time-in-ms-when-sync-empty: 3000
+    

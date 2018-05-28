@@ -1,0 +1,87 @@
+version: '2.3'
+
+services:
+  mysql:
+    container_name: mysql-ms
+    hostname: mysql
+    image: mysql:5.7.19
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - ./mysql/scripts:/docker-entrypoint-initdb.d
+      - ./mysql/data:/var/lib/mysql
+    command: [--ssl=0]
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-uroot", "-ppassword"]
+      interval: 10s
+      timeout: 60s
+      retries: 5
+    networks:
+      - app_net
+      
+  eureka:
+    build: ../eureka-server
+    container_name: eureka
+    hostname: eureka
+    restart: always
+    ports:
+      - "9091:9091"
+    volumes:
+      - ./eureka/config:/tmp/config
+      - ./eureka/logs:/tmp/logs
+    networks:
+      - app_net
+    
+  auth-server:
+    build: ../auth-server
+    container_name: auth-server
+    hostname: auth-server
+    restart: always
+    ports:
+      - "9999:9999"
+    volumes:
+      - ./auth-server/config:/tmp/config
+      - ./auth-server/logs:/tmp/logs
+    depends_on:
+      - eureka
+    networks:
+      - app_net
+    
+  ms-got:
+    build: ../ms-got
+    container_name: ms-got
+    hostname: ms-got
+    restart: always
+    ports:
+      - "9093:9093"
+    volumes:
+      - ./ms-got/config:/tmp/config
+      - ./ms-got/logs:/tmp/logs
+    depends_on:
+      - eureka
+    networks:
+      - app_net
+
+      
+  zuul:
+    build: ../zuul
+    container_name: zuul
+    hostname: zuul
+    restart: always
+    ports:
+      - "9092:9092"
+    volumes:
+      - ./zuul/config:/tmp/config
+      - ./zuul/logs:/tmp/logs
+    depends_on:
+      - eureka
+      - ms-got
+      - auth-server
+    networks:
+      - app_net
+      
+networks:
+  app_net:
+    driver: bridge

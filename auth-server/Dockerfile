@@ -6,9 +6,6 @@ ENV TIME_ZONE America/Sao_Paulo
 
 RUN apk --no-cache add \
 	tzdata \
-    fontconfig \
-    ttf-dejavu \
-    msttcorefonts-installer \
     # Set timezone
     && echo "${TIME_ZONE}" > /etc/timezone \ 
 	&& ln -sf /usr/share/zoneinfo/${TIME_ZONE} /etc/localtime 
