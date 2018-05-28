@@ -35,6 +35,8 @@ logging:
 
 spring:
   profiles: docker
+  application:
+    name: eureka-server 
 
 server:
   port: 9091
