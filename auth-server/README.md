@@ -12,6 +12,8 @@ Remember, this project tries to register to Eureka Server as soon as it starts, 
 
 Before you run your application, make sure to configure your JDBC Connection. This sample features [DDL and DML Scripts for MySQL][scripts] that will be used across all projects of this article. Have your MySQL installation or container up & running or else you'll end up getting a few errors. 
 
+You can notice that we have our unique client allowed to issue OAuth2 tokens has it's clientId:Secret as `adminapp`:`password`. 
+
 # Start Application
 
 ```sh
@@ -49,6 +51,8 @@ Springfox 2.9.0 Swagger definition of our endpoints are available at http://loca
 # Testing your Server
 
 SignIn: `POST /oauth/token`
+
+Hint: Base64 Encode our clientId:secret to use our Basic Authentication header.
 
 ```sh
 $ curl -X POST \
