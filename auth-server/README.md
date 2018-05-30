@@ -2,9 +2,11 @@
 
 OAuth2 Authorization Server built using Spring Boot 2 + Spring Security OAuth2. This auth server is responsible for intercepting login requests from external applications and generating [JWT][jwt] tokens containing user credentials.  
 
+This Auth Server behaves like a Microservice built upon Netflix OSS stack, which is plugged into Eureka Server and have it's routes configured through Zuul Gateway in a Dockerized manner or not.
+
 All Access Tokens and Refresh Tokens are stored in a `JdbcTokenStore`, which means the JWT is persisted in our datastore allowing our server to go offline without any hazard to our issued tokens.
 
-It also features a custom logout handler for deleting access tokens.
+It also features a custom logout handler for revoking(deleting from database) access tokens.
 
 Remember, this project tries to register to Eureka Server as soon as it starts, so in case you don't want Eureka as part of your game just remove it's dependency from `pom.xml` and the respective annotations from `OAuthApplication.java` and `application.yml`.
 
