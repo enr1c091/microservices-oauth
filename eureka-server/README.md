@@ -33,7 +33,7 @@ Run your container:
 $ docker run -d -p 9091:9091 --name=eureka -v /opt/eureka/logs:/tmp/logs -v /opt/eureka/config:/tmp/config eureka
 ```
 
-Logs generated from SLF4J will be generated in /opt/auth/logs folder. Place your custom application properties in /opt/auth/config/application.yml optmized for `spring.profiles: docker`. You can use this [file][sample1] as an example.
+Logs generated from SLF4J will be generated in /opt/eureka/logs folder. Place your custom application properties in /opt/eureka/config/application.yml optmized for `spring.profiles: docker`. You can use this [file][sample1] as an example.
 
 # Testing your Server
 
