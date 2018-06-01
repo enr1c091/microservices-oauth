@@ -13,11 +13,16 @@ Before you run your application, make sure to configure your JDBC Connection. Th
 
 # Start Application
 
-Clone this repo. Go it's parent folder of and run the following command:
-
+1. Start your MySQL Database and make sure all tables are created;
+2. Clone this repo. Go it's parent folder of and run the following command:
+```sh
+$ mvn clean install -DskipTests
+```
+3. Run the following command for every project in the following order (Eureka > MS-GOT > Auth-Server > Zuul):
 ```sh
 $ mvn spring-boot:run
 ```
+4. Enjoy
 
 # Application Endpoints
 
