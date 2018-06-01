@@ -40,6 +40,6 @@ Logs generated from SLF4J will be generated in /opt/eureka/logs folder. Place yo
 Access [http://localhost:9091][eureka] to check which services are connected to your discovery server.
 
 
-   [eureka]: <http://localhost:9091//>
+   [eureka]: <http://localhost:9091/>
    [sample1]: <https://github.com/enr1c091/microservices-oauth/blob/master/docker-compose/eureka/config/application.yml>
    [eureka-info]: <https://github.com/Netflix/eureka>
