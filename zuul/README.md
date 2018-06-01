@@ -37,9 +37,13 @@ Logs generated from SLF4J will be generated in /opt/zuul/logs folder. Place your
 
 # Testing your Server
 
-Access [http://localhost:9092][zuul] to check which services are connected to your discovery server.
+Access [http://localhost:9092/ms-got/house][zuul] instead using port 9093 to make sure Zuul's routing incoming requests properly to your back-end services.
 
+# Additional Info
 
-   [zuul]: <http://localhost:9092/>
+For more information abou Zuul's routing properties, check [this great guide][routing]
+
+   [zuul]: <http://localhost:9092/ms-got/house/>
    [sample1]: <https://github.com/enr1c091/microservices-oauth/blob/master/docker-compose/zuul/config/application.yml>
    [zuul-info]: <https://github.com/Netflix/zuul>
+   [routing]: <https://cloud.spring.io/spring-cloud-netflix/multi/multi__router_and_filter_zuul.html>
