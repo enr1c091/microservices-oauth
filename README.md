@@ -45,3 +45,5 @@ Springfox 2.9.0 Swagger definition of our endpoints are available at http://loca
 > **TO-DO:**
 > - Add docker-compose for creating a Stack on Rancher.
 > - Add a Feign client for demonstrating how to invoke REST Services besides REST Template.
+
+[scripts]: <https://github.com/enr1c091/microservices-oauth/blob/master/docker-compose/mysql/scripts/oauth2.sql>
