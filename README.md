@@ -1,5 +1,7 @@
 # Building Scalable Container-Ready and Secure Microservices
 
+The full article of this repository can be found [here][article]!!
+
 This repository contains an example of how to design and implement production-ready microservices using Spring Boot and Spring Cloud (Netflix OSS). It also applies some of the best practices for design and implementation of REST APIs like HATEOAS, DTOs, AOP and Swagger annotations for later documentation.
 
 For enhanced security, OAuth2 authentication is added via JWT tokens stored in our MySQL (or any database of your preference) to avoid unwanted access and making sure revoked tokens are indeed... revoked.
@@ -47,3 +49,4 @@ Springfox 2.9.0 Swagger definition of our endpoints are available at http://loca
 > - Add a Feign client for demonstrating how to invoke REST Services besides REST Template.
 
 [scripts]: <https://github.com/enr1c091/microservices-oauth/blob/master/docker-compose/mysql/scripts/oauth2.sql>
+[article]: <https://dzone.com/articles/building-scalable-container-ready-and-secure-micro>
